@@ -8,14 +8,10 @@ ARG project_dir=/projects/
 WORKDIR $project_dir
 ENV PYTHONPATH $project_dir
 
-ADD requirements.txt $project_dir
-ADD app.py $project_dir
-ADD env.sh $project_dir
-ADD product.sh $project_dir
-ADD config $project_dir
-ADD dc $project_dir
-
+COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
+
+COPY . .
 
 EXPOSE 11002
 ENTRYPOINT ["python3", "-m", "flask", "run", "-p 11002", "--host=0.0.0.0"]
