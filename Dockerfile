@@ -1,4 +1,4 @@
-FROM python:slim
+FROM python:slim-buster
 
 ENV LANG zh_CN.UTF-8
 ENV LANGUAGE zh_CN:zh
