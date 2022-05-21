@@ -25,6 +25,7 @@ def init():
 @scheduler.task('cron', id='stock_daily', day='*', hour='1', minute='1', second='1')
 def daily_job():
     daily_job()
+    print("执行每日更新计划完毕!")
 
 
 if __name__ == '__main__':
