@@ -1,4 +1,4 @@
-FROM python:slim
+FROM python:alpine
 
 ENV LANG zh_CN.UTF-8
 ENV LANGUAGE zh_CN:zh
@@ -14,8 +14,7 @@ ADD product.sh $project_dir
 ADD config $project_dir
 ADD dc $project_dir
 
-RUN python3 -m pip install --upgrade pip
-RUN pip3 install -r requirements.txt --ignore-installed
+RUN pip install -r requirements.txt --ignore-installed
 
 EXPOSE 11002
 ENTRYPOINT ["python", "-m flask", "run", "-p 11002 --host=0.0.0.0"]
