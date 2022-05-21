@@ -14,7 +14,7 @@ ADD product.sh $project_dir
 ADD config $project_dir
 ADD dc $project_dir
 
-RUN pip install -r requirements.txt --ignore-installed
+RUN pip3 install -r requirements.txt --ignore-installed
 
 EXPOSE 11002
-ENTRYPOINT ["python", "-m flask", "run", "-p 11002 --host=0.0.0.0"]
+ENTRYPOINT ["python3", "-m flask", "run", "-p 11002 --host=0.0.0.0"]
