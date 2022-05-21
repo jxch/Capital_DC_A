@@ -1,4 +1,4 @@
-FROM python:alpine
+FROM python:slim
 
 ENV LANG zh_CN.UTF-8
 ENV LANGUAGE zh_CN:zh
