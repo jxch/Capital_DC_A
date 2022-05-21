@@ -1,4 +1,4 @@
-FROM python:latest
+FROM python:alpine as builder
 
 ENV LANG zh_CN.UTF-8
 ENV LANGUAGE zh_CN:zh
