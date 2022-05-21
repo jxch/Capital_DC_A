@@ -14,8 +14,8 @@ ADD product.sh $project_dir
 ADD config $project_dir
 ADD dc $project_dir
 
-RUN apk update && apk add build-base
-RUN pip install -r requirements.txt --ignore-installed
+RUN python3 -m pip install --upgrade pip
+RUN pip3 install -r requirements.txt --ignore-installed
 RUN ./product.sh
 
 EXPOSE 11002
