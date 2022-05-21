@@ -14,4 +14,4 @@ ADD dc $project_dir
 
 RUN pip install -r requirements.txt
 
-ENTRYPOINT ["python", "app.py"]
+ENTRYPOINT ["python", "-m flask", "run", "-p 8080"]
