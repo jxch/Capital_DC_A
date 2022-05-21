@@ -18,16 +18,18 @@ def stock_daily_job():
     stock_bse['exchange'] = 'BSE'
     stocks = pd.concat([stock_sse, stock_szse, stock_bse])
 
+    print("准备写入数据库", flush=True)
+
     engine = engine_qbh_capital()
     session = sessionmaker(bind=engine)()
 
     try:
         pd.io.sql.to_sql(stocks, Stock.__tablename__, engine, if_exists='replace',
                          dtype={'symbol': VARCHAR(6), 'name': VARCHAR(10), 'exchange': VARCHAR(4)})
-        print("update success!")
+        print("update success!", flush=True)
     except Exception:
         traceback.print_exc()
-        print("update fail!")
+        print("update fail!", flush=True)
     finally:
         session.close()
         engine.dispose()
