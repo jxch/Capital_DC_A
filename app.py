@@ -1,6 +1,9 @@
 from flask import Flask
 from flask_apscheduler import APScheduler
-from dc import daily_job
+import os
+import py_eureka_client.eureka_client as eureka_client
+from config import config_dict
+from dc import daily
 
 
 class Config(object):
@@ -9,6 +12,16 @@ class Config(object):
 
 scheduler = APScheduler()
 app = Flask(__name__)
+
+env = os.getenv('CAPITAL_DC_A_ENV')
+app.config.from_object(config_dict[env])
+# app.config.from_object(config_dict['dev'])
+
+eureka_client.init(eureka_server=app.config.get('EUREKA_SERVER'),
+                   app_name=app.config.get('APP_NAME'),
+                   instance_host=app.config.get('SERVER_HOST'),
+                   instance_port=app.config.get('SERVER_PORT'),
+                   ha_strategy=eureka_client.HA_STRATEGY_RANDOM)
 
 
 @app.route('/')
@@ -24,12 +37,16 @@ def init():
 
 @scheduler.task('cron', id='stock_daily', day='*', hour='1', minute='1', second='1')
 def daily_job():
-    daily_job()
-    print("执行每日更新计划完毕!")
+    print("daily - job", flush=True)
+    daily()
+    print("执行每日更新计划完毕!", flush=True)
 
 
 if __name__ == '__main__':
     app.config.from_object(Config())
     scheduler.init_app(app)
     scheduler.start()
-    app.run()
+    app.run(debug=app.config.get('DEBUG'),
+            threaded=app.config.get('THREADED'),
+            port=app.config.get('SERVER_PORT'),
+            host=app.config.get('HOST'))

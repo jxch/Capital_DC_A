@@ -1,5 +1,5 @@
-from stock_daily import stock_daily_job
+from . import stock_daily
 
 
-def daily_job():
-    stock_daily_job()
+def daily():
+    stock_daily.stock_daily_job()
