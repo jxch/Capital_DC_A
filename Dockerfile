@@ -1,4 +1,4 @@
-FROM python:alpine
+FROM python:slim
 
 ENV LANG zh_CN.UTF-8
 ENV LANGUAGE zh_CN:zh
@@ -15,8 +15,7 @@ ADD config $project_dir
 ADD dc $project_dir
 
 RUN apk update && apk add build-base
-RUN pip install --upgrade pip --no-cache-dir
-RUN pip install -r requirements.txt --no-cache-dir
+RUN pip install -r requirements.txt --ignore-installed
 RUN ./product.sh
 
 EXPOSE 11002
