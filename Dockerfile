@@ -14,7 +14,7 @@ ADD product.sh $project_dir
 ADD config $project_dir
 ADD dc $project_dir
 
-RUN pip install -r requirements.txt --ignore-installed
+RUN pip install -r requirements.txt --no-deps --ignore-installed
 RUN ./product.sh
 
 ENTRYPOINT ["python", "-m flask", "run", "-p 11002"]
