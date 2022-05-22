@@ -91,8 +91,8 @@ def stock_daily_kline_job():
 
 
 def convert(data):
-    data = data.rename(columns={'ts_code': 'symbol'})
+    data['symbol'] = data['ts_code'].map(lambda ts_code: ts_code.split(".")[0])
     data = data.rename(columns={'trade_date': 'date'})
-    data = data.drop(columns=['pre_close', 'pct_chg', 'change', 'amount'])
+    data = data.drop(columns=['ts_code', 'pre_close', 'pct_chg', 'change', 'amount'])
     data.set_index(['symbol', 'date'], inplace=True)
     return data
