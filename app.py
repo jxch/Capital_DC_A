@@ -5,6 +5,7 @@ import py_eureka_client.eureka_client as eureka_client
 from config import config_dict
 from dc import daily, init
 import _thread
+import traceback
 
 
 class Config(object):
@@ -30,13 +31,16 @@ def hello_world():  # put application's code here
     return 'Capital DC A Service!'
 
 
-def init_run(thread_name):
+def init_run(thread_name, k):
     init()
 
 
 @app.route('/init')
 def app_init():
-    _thread.start_new_thread(init_run, args=('thread-init',))
+    try:
+        _thread.start_new_thread(init_run, args=('thread-init', 2, ))
+    except Exception:
+        traceback.print_exc()
     return 'init thread start!'
 
 
