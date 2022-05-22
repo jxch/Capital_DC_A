@@ -39,7 +39,7 @@ def app_init():
     return 'init thread start!'
 
 
-@scheduler.task('cron', id='stock_daily', day='*', hour='1', minute='1', second='1')
+@scheduler.task('cron', id='stock_daily', day='*', hour='10', minute='0', second='0')
 def daily_job():
     print("daily - job", flush=True)
     daily()
