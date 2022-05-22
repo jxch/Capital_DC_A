@@ -48,7 +48,7 @@ def stock_daily_kline_init():
             ts_codes = ''
             for stock in stocks:
                 ts_codes = ts_codes + stock.ts_code() + ','
-            ts_codes.pop()
+            ts_codes = ts_codes[:-1]
             data = pro.daily(ts_code=ts_codes,
                              start_date=StockKLinesDaily.start_date(),
                              end_date=StockKLinesDaily.end_date())
