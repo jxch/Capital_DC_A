@@ -4,6 +4,7 @@ import os
 import py_eureka_client.eureka_client as eureka_client
 from config import config_dict
 from dc import daily, init
+import _thread
 
 
 class Config(object):
@@ -31,8 +32,8 @@ def hello_world():  # put application's code here
 
 @app.route('/init')
 def init():
-    init()
-    return 'init success!'
+    _thread.start_new_thread(init, ("Thread-init"))
+    return 'init thread start!'
 
 
 @scheduler.task('cron', id='stock_daily', day='*', hour='1', minute='1', second='1')
