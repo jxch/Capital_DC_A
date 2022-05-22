@@ -3,7 +3,7 @@ from flask_apscheduler import APScheduler
 import os
 import py_eureka_client.eureka_client as eureka_client
 from config import config_dict
-from dc import daily
+from dc import daily, init
 
 
 class Config(object):
@@ -31,7 +31,7 @@ def hello_world():  # put application's code here
 
 @app.route('/init')
 def init():
-    daily_job()
+    init()
     return 'init success!'
 
 
