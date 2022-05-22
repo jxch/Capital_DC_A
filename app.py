@@ -32,7 +32,7 @@ def hello_world():  # put application's code here
 
 @app.route('/init')
 def init():
-    _thread.start_new_thread(init, ("Thread-init"))
+    _thread.start_new_thread(init, args=())
     return 'init thread start!'
 
 
