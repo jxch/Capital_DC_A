@@ -55,7 +55,7 @@ def stock_daily_kline_init():
                                      start_date=StockKLinesDaily.start_date(),
                                      end_date=StockKLinesDaily.end_date())
                 except:
-                    time.sleep(60)
+                    time.sleep(60 * i)
                     print("[init-job] 1分钟后重试[" + str(i) + "/10]", flush=True)
                 else:
                     pd.io.sql.to_sql(convert(data), StockKLinesDaily.__tablename__, engine, if_exists='append',
@@ -87,7 +87,7 @@ def stock_daily_kline_job():
                                      start_date=StockKLinesDaily.end_date(),
                                      end_date=StockKLinesDaily.end_date())
                 except:
-                    time.sleep(60)
+                    time.sleep(60 * i)
                     print("[init-job] 1分钟后重试[" + str(i) + "/10]", flush=True)
                 else:
                     pd.io.sql.to_sql(convert(data), StockKLinesDaily.__tablename__, engine, if_exists='append',
