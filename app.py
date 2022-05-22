@@ -14,9 +14,9 @@ class Config(object):
 scheduler = APScheduler()
 app = Flask(__name__)
 
-# env = os.getenv('CAPITAL_DC_A_ENV')
-# app.config.from_object(config_dict[env])
-app.config.from_object(config_dict['dev'])
+env = os.getenv('CAPITAL_DC_A_ENV')
+app.config.from_object(config_dict[env])
+# app.config.from_object(config_dict['dev'])
 
 eureka_client.init(eureka_server=app.config.get('EUREKA_SERVER'),
                    app_name=app.config.get('APP_NAME'),
