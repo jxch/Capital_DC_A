@@ -49,12 +49,17 @@ def stock_daily_kline_init():
             for stock in stocks:
                 ts_codes = ts_codes + stock.ts_code() + ','
             ts_codes = ts_codes[:-1]
-            data = pro.daily(ts_code=ts_codes,
-                             start_date=StockKLinesDaily.start_date(),
-                             end_date=StockKLinesDaily.end_date())
-            pd.io.sql.to_sql(convert(data), StockKLinesDaily.__tablename__, engine, if_exists='append',
-                             dtype={'date': DATE, 'symbol': VARCHAR(6)})
-            time.sleep(1)
+            for i in range(10):
+                try:
+                    data = pro.daily(ts_code=ts_codes,
+                                     start_date=StockKLinesDaily.start_date(),
+                                     end_date=StockKLinesDaily.end_date())
+                except:
+                    time.sleep(60)
+                    print("[init-job] 1分钟后重试[" + str(i) + "/10]", flush=True)
+                else:
+                    pd.io.sql.to_sql(convert(data), StockKLinesDaily.__tablename__, engine, if_exists='append',
+                                     dtype={'date': DATE, 'symbol': VARCHAR(6)})
         print("[init-job] insert stock daily kline success!", flush=True)
     except Exception:
         traceback.print_exc()
@@ -76,11 +81,17 @@ def stock_daily_kline_job():
             for stock in stocks:
                 ts_codes = ts_codes + stock.ts_code() + ','
             ts_codes = ts_codes[:-1]
-            data = pro.daily(ts_code=ts_codes,
-                             start_date=StockKLinesDaily.end_date(),
-                             end_date=StockKLinesDaily.end_date())
-            pd.io.sql.to_sql(convert(data), StockKLinesDaily.__tablename__, engine, if_exists='append',
-                             dtype={'date': DATE, 'symbol': VARCHAR(6)})
+            for i in range(10):
+                try:
+                    data = pro.daily(ts_code=ts_codes,
+                                     start_date=StockKLinesDaily.end_date(),
+                                     end_date=StockKLinesDaily.end_date())
+                except:
+                    time.sleep(60)
+                    print("[init-job] 1分钟后重试[" + str(i) + "/10]", flush=True)
+                else:
+                    pd.io.sql.to_sql(convert(data), StockKLinesDaily.__tablename__, engine, if_exists='append',
+                                     dtype={'date': DATE, 'symbol': VARCHAR(6)})
         print("[daily-job] insert stock daily kline success!", flush=True)
     except Exception:
         traceback.print_exc()
