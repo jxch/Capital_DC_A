@@ -30,9 +30,13 @@ def hello_world():  # put application's code here
     return 'Capital DC A Service!'
 
 
+def init_run(thread_name):
+    init()
+
+
 @app.route('/init')
-def init():
-    _thread.start_new_thread(init, args=())
+def app_init():
+    _thread.start_new_thread(init_run, args=('thread-init',))
     return 'init thread start!'
 
 
