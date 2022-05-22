@@ -54,7 +54,7 @@ def stock_daily_kline_init():
                              end_date=StockKLinesDaily.end_date())
             pd.io.sql.to_sql(convert(data), StockKLinesDaily.__tablename__, engine, if_exists='append',
                              dtype={'date': DATE, 'symbol': VARCHAR(6)})
-            time.sleep(0.2)
+            time.sleep(1)
         print("[init-job] insert stock daily kline success!", flush=True)
     except Exception:
         traceback.print_exc()
