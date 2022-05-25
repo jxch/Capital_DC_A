@@ -13,5 +13,7 @@ RUN pip3 install -r requirements.txt
 
 COPY . .
 
+RUN chmod +x ./product.sh & chmod +x ./product_china.sh
+
 EXPOSE 11002
-ENTRYPOINT ["python3", "-m", "flask", "run", "-p 11002", "--host=0.0.0.0"]
+ENTRYPOINT ["/bin/bash", "-c ./product.sh"]

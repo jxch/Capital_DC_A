@@ -18,6 +18,8 @@ env = os.getenv('CAPITAL_DC_A_ENV')
 app.config.from_object(config_dict[env])
 # app.config.from_object(config_dict['dev'])
 
+print("当前环境: " + env)
+
 eureka_client.init(eureka_server=app.config.get('EUREKA_SERVER'),
                    app_name=app.config.get('APP_NAME'),
                    instance_host=app.config.get('SERVER_HOST'),
