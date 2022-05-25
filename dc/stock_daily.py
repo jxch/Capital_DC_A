@@ -1,4 +1,5 @@
-from config import pro, engine_capital
+from config import pro
+from db import engine_capital
 import pandas as pd
 from dc.model.Stock import Stock
 from dc.model.StockKLines import StockKLinesDaily
