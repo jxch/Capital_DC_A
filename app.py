@@ -17,7 +17,7 @@ app = Flask(__name__)
 env = os.getenv('CAPITAL_DC_A_ENV')
 app.config.from_object(config_dict[env])
 # app.config.from_object(config_dict['dev'])
-
+app.app_context().push()
 print("当前环境: " + env)
 
 if env != 'product_china':
