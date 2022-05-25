@@ -1,4 +1,4 @@
-from config import pro, engine_qbh_capital
+from config import pro, engine_capital
 import pandas as pd
 from dc.model.Stock import Stock
 from dc.model.StockKLines import StockKLinesDaily
@@ -22,7 +22,7 @@ def stock_daily_job():
     stocks = pd.concat([stock_sse, stock_szse, stock_bse])
 
     print("准备写入数据库", flush=True)
-    engine = engine_qbh_capital()
+    engine = engine_capital()
     session = sessionmaker(bind=engine)()
     try:
         pd.io.sql.to_sql(stocks, Stock.__tablename__, engine, if_exists='replace',
@@ -37,7 +37,7 @@ def stock_daily_job():
 
 
 def stock_daily_kline_init():
-    engine = engine_qbh_capital()
+    engine = engine_capital()
     session = sessionmaker(bind=engine)()
     print("准备查询数据库", flush=True)
     try:
@@ -70,7 +70,7 @@ def stock_daily_kline_init():
 
 
 def stock_daily_kline_job():
-    engine = engine_qbh_capital()
+    engine = engine_capital()
     session = sessionmaker(bind=engine)()
     print("准备查询数据库", flush=True)
     try:
