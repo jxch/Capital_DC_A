@@ -20,11 +20,12 @@ app.config.from_object(config_dict[env])
 
 print("当前环境: " + env)
 
-eureka_client.init(eureka_server=app.config.get('EUREKA_SERVER'),
-                   app_name=app.config.get('APP_NAME'),
-                   instance_host=app.config.get('SERVER_HOST'),
-                   instance_port=app.config.get('SERVER_PORT'),
-                   ha_strategy=eureka_client.HA_STRATEGY_RANDOM)
+if env != 'product_china':
+    eureka_client.init(eureka_server=app.config.get('EUREKA_SERVER'),
+                       app_name=app.config.get('APP_NAME'),
+                       instance_host=app.config.get('SERVER_HOST'),
+                       instance_port=app.config.get('SERVER_PORT'),
+                       ha_strategy=eureka_client.HA_STRATEGY_RANDOM)
 
 
 @app.route('/')
