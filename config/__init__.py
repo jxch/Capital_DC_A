@@ -8,10 +8,9 @@ from . import product_china_setting
 from . import test_setting
 from . import local_setting
 
-print("当前数据源: " + current_app.config.get('DB_CAPITAL'))
-
 
 def engine_capital():
+    print("当前数据源: " + current_app.config.get('DB_CAPITAL'))
     return create_engine(current_app.config.get('DB_CAPITAL'), encoding='utf8', pool_timeout=1000)
 
 
